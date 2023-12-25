@@ -7,6 +7,8 @@ const $ = selector => document.getElementById(selector)
 
 let nodeList;
 let mokeponChosen=0;
+let playerMokepon = $("PlayerMokepon");
+let pcMokepon = $("PcMokepon");
 function chooseMokepon(){
     nodeList = document.getElementsByName("Mokepon");
 /*     console.log(nodeList.length); */
@@ -14,7 +16,7 @@ function chooseMokepon(){
         /* console.log(input); */
         if(input.checked){
             mokeponChosen++
-            /* console.log(input); */
+            playerMokepon.innerHTML=input.id;
         }
     });
     if(!mokeponChosen){
