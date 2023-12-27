@@ -3,8 +3,10 @@ let playerMokepon = $("PlayerMokepon");
 let pcMokepon = $("PcMokepon");
 let btnChooseMokepon = $("BtnChooseMokepon");
 let mokeponChosen=0;
+let Attacks=["Fire","Water","Earth"];
 let playerAttack;
 let PcAttack;
+let result;
 
 function chooseMokepon(){
     inputMokepons = document.getElementsByName("Mokepon");
@@ -49,18 +51,26 @@ function AssingAttack(Attack) {
 
 function randomAttack(){
     let randomNumber = random(1,3);
-    let Attacks=["Fire","Water","Earth"];
     PcAttack=Attacks[randomNumber];
-
-    createMessages();
-
+    combat();
 };
 
 function createMessages(){
     let sectionMessages=$("Messages");
     let paragraph =document.createElement("p");
-    paragraph.innerHTML = "Your Mokepon Attacks with "+playerAttack+", My Mokepon Attacks with "+PcAttack+". Pending!";
+    paragraph.innerHTML = "Your Mokepon Attacks with "+playerAttack+", My Mokepon Attacks with "+PcAttack+". "+result+"!";
     sectionMessages.appendChild(paragraph)
+};
+
+function combat(){
+    if(PcAttack==playerAttack){
+        result="Tie";
+    }else if((playerAttack==Attacks[0] & PcAttack==Attacks[2])||(playerAttack==Attacks[1] & PcAttack==Attacks[0])||(playerAttack==Attacks[2] & PcAttack==Attacks[1])){
+        result="YOU WIN";
+    }else{
+        result="YOU LOSE";
+    };
+    createMessages();
 };
 
 btnChooseMokepon.addEventListener("click",chooseMokepon);
