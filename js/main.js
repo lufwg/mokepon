@@ -4,6 +4,7 @@ let pcMokepon = $("PcMokepon");
 let btnChooseMokepon = $("BtnChooseMokepon");
 let mokeponChosen=0;
 let playerAttack;
+let PcAttack;
 
 function chooseMokepon(){
     inputMokepons = document.getElementsByName("Mokepon");
@@ -32,11 +33,6 @@ function random(min,max){
     return Math.floor(Math.random()*(max-min+1)/* +min */);
 };
 
-function AssingAttack(Attack) {
-    playerAttack = Attack;
-    alert(playerAttack);
-};
-
 function functionalAttacks(){
     btnAttacks = document.getElementsByName("Attack");
     btnAttacks.forEach(Attack => {
@@ -46,5 +42,18 @@ function functionalAttacks(){
     });
 };
 
+function AssingAttack(Attack) {
+    playerAttack = Attack;
+    randomAttack();
+    alert("playerAttack "+ playerAttack+ " .PcAttack "+PcAttack);
+};
+
+function randomAttack(){
+    let randomNumber = random(1,3);
+    let Attacks=["Fire","Water","Earth"];
+    PcAttack=Attacks[randomNumber];
+};
+
 btnChooseMokepon.addEventListener("click",chooseMokepon);
+
 functionalAttacks();
