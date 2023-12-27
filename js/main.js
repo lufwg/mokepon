@@ -1,19 +1,14 @@
-function runCode(){
-    let btnChooseMokepon = $("BtnChooseMokepon");
-    btnChooseMokepon.addEventListener("click",chooseMokepon);
-};
-
 const $ = selector => document.getElementById(selector);
-
-let nodeList;
-let mokeponChosen=0;
 let playerMokepon = $("PlayerMokepon");
 let pcMokepon = $("PcMokepon");
+let btnChooseMokepon = $("BtnChooseMokepon");
+let mokeponChosen=0;
+let playerAttack;
 
 function chooseMokepon(){
-    nodeList = document.getElementsByName("Mokepon");
-/*     console.log(nodeList.length); */
-    nodeList.forEach(input => {
+    inputMokepons = document.getElementsByName("Mokepon");
+/*     console.log(inputMokepons.length); */
+    inputMokepons.forEach(input => {
         /* console.log(input); */
         if(input.checked){
             mokeponChosen++
@@ -32,8 +27,24 @@ function randomMokepon(){
     let Mokepons=["Hipodoge","Capipepo","Ratigueya"];
     pcMokepon.innerHTML=Mokepons[randomNumber];
 };
-    function random(min,max){
+
+function random(min,max){
     return Math.floor(Math.random()*(max-min+1)/* +min */);
 };
 
-window.addEventListener("load",runCode);
+function AssingAttack(Attack) {
+    playerAttack = Attack;
+    alert(playerAttack);
+};
+
+function functionalAttacks(){
+    btnAttacks = document.getElementsByName("Attack");
+    btnAttacks.forEach(Attack => {
+        Attack.addEventListener("click", function() {
+            AssingAttack(Attack.innerHTML)
+        });
+    });
+};
+
+btnChooseMokepon.addEventListener("click",chooseMokepon);
+functionalAttacks();
