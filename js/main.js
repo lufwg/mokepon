@@ -45,13 +45,22 @@ function functionalAttacks(){
 function AssingAttack(Attack) {
     playerAttack = Attack;
     randomAttack();
-    alert("playerAttack "+ playerAttack+ " .PcAttack "+PcAttack);
 };
 
 function randomAttack(){
     let randomNumber = random(1,3);
     let Attacks=["Fire","Water","Earth"];
     PcAttack=Attacks[randomNumber];
+
+    createMessages();
+
+};
+
+function createMessages(){
+    let sectionMessages=$("Messages");
+    let paragraph =document.createElement("p");
+    paragraph.innerHTML = "Your Mokepon Attacks with "+playerAttack+", My Mokepon Attacks with "+PcAttack+". Pending!";
+    sectionMessages.appendChild(paragraph)
 };
 
 btnChooseMokepon.addEventListener("click",chooseMokepon);
