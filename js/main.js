@@ -7,6 +7,8 @@ let Attacks=["Fire","Water","Earth"];
 let playerAttack;
 let PcAttack;
 let result;
+let livesPlayer=3;
+let livesPc=3;
 
 function chooseMokepon(){
     inputMokepons = document.getElementsByName("Mokepon");
@@ -63,14 +65,21 @@ function createMessages(){
 };
 
 function combat(){
+    let spanPlayerLives = $("livesPlayer");
+    let spanPcLives= $("livesPc");
     if(PcAttack==playerAttack){
         result="Tie";
     }else if((playerAttack==Attacks[0] & PcAttack==Attacks[2])||(playerAttack==Attacks[1] & PcAttack==Attacks[0])||(playerAttack==Attacks[2] & PcAttack==Attacks[1])){
         result="YOU WIN";
+        livesPc--
     }else{
         result="YOU LOSE";
+        livesPlayer--
     };
     createMessages();
+
+    spanPlayerLives.innerHTML=livesPlayer;
+    spanPcLives.innerHTML=livesPc;
 };
 
 btnChooseMokepon.addEventListener("click",chooseMokepon);
