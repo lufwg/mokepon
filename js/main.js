@@ -2,6 +2,7 @@ const $ = selector => document.getElementById(selector);
 let playerMokepon = $("PlayerMokepon");
 let pcMokepon = $("PcMokepon");
 let btnChooseMokepon = $("BtnChooseMokepon");
+let sectionMessages=$("Messages");
 let mokeponChosen=0;
 let Attacks=["Fire","Water","Earth"];
 let playerAttack;
@@ -57,7 +58,6 @@ function randomAttack(){
 };
 
 function createMessages(result){
-    let sectionMessages=$("Messages");
     let spanPlayerLives = $("livesPlayer");
     let spanPcLives= $("livesPc");
     let paragraph =document.createElement("p");
@@ -66,6 +66,30 @@ function createMessages(result){
     spanPlayerLives.innerHTML=livesPlayer;
     spanPcLives.innerHTML=livesPc;
 };
+
+function createFinalMessage(finalResult){
+    let finalParagraph =document.createElement("p");
+
+ if (finalResult){
+    finalParagraph.innerHTML = "CONGRATULATIONS! YOU WIN!"
+ }else{
+    finalParagraph.innerHTML = "SORRY :c  YOU LOSE!"
+ };
+ sectionMessages.appendChild(finalParagraph);
+}
+
+function checkLives(){
+    let WinOrLose;
+    if(livesPc == 0){
+        WinOrLose=1;
+    }else if( livesPlayer == 0){
+        WinOrLose=0;
+    }else{
+        return "Continue"
+    };
+    
+    createFinalMessage(WinOrLose);
+}
 
 function combat(){
     let result;
@@ -79,6 +103,7 @@ function combat(){
         livesPlayer--
     };
     createMessages(result);
+    checkLives();
 };
 
 btnChooseMokepon.addEventListener("click",chooseMokepon);
