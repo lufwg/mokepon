@@ -6,7 +6,6 @@ let mokeponChosen=0;
 let Attacks=["Fire","Water","Earth"];
 let playerAttack;
 let PcAttack;
-let result;
 let livesPlayer=3;
 let livesPc=3;
 
@@ -38,7 +37,7 @@ function random(min,max){
 };
 
 function functionalAttacks(){
-    btnAttacks = document.getElementsByName("Attack");
+    let btnAttacks = document.getElementsByName("Attack");
     btnAttacks.forEach(Attack => {
         Attack.addEventListener("click", function() {
             AssingAttack(Attack.innerHTML)
@@ -57,16 +56,19 @@ function randomAttack(){
     combat();
 };
 
-function createMessages(){
+function createMessages(result){
     let sectionMessages=$("Messages");
+    let spanPlayerLives = $("livesPlayer");
+    let spanPcLives= $("livesPc");
     let paragraph =document.createElement("p");
     paragraph.innerHTML = "Your Mokepon Attacks with "+playerAttack+", My Mokepon Attacks with "+PcAttack+". "+result+"!";
-    sectionMessages.appendChild(paragraph)
+    sectionMessages.appendChild(paragraph);
+    spanPlayerLives.innerHTML=livesPlayer;
+    spanPcLives.innerHTML=livesPc;
 };
 
 function combat(){
-    let spanPlayerLives = $("livesPlayer");
-    let spanPcLives= $("livesPc");
+    let result;
     if(PcAttack==playerAttack){
         result="Tie";
     }else if((playerAttack==Attacks[0] & PcAttack==Attacks[2])||(playerAttack==Attacks[1] & PcAttack==Attacks[0])||(playerAttack==Attacks[2] & PcAttack==Attacks[1])){
@@ -76,10 +78,7 @@ function combat(){
         result="YOU LOSE";
         livesPlayer--
     };
-    createMessages();
-
-    spanPlayerLives.innerHTML=livesPlayer;
-    spanPcLives.innerHTML=livesPc;
+    createMessages(result);
 };
 
 btnChooseMokepon.addEventListener("click",chooseMokepon);
