@@ -4,6 +4,9 @@ let pcMokepon = $("PcMokepon");
 let btnChooseMokepon = $("BtnChooseMokepon");
 let btnReStart = $("BtnReStart");
 let sectionMessages=$("Messages");
+let sectionMokepon=$("ChooseMokepon");
+let sectionAttack=$("ChooseAttack");
+let sectionReStart=$("ReStart");
 let btnAttacks = document.getElementsByName("Attack");
 let mokeponChosen=0;
 let Attacks=["Fire","Water","Earth"];
@@ -26,6 +29,9 @@ function chooseMokepon(){
         alert("Choose A Mokepon To Continue");
     }else{
         randomMokepon();
+        display(sectionAttack);
+        hide(sectionMokepon);
+
     };
 };
 
@@ -70,14 +76,14 @@ function createMessages(result){
 
 function createFinalMessage(finalResult){
     let finalParagraph =document.createElement("p");
-
  if (finalResult){
     finalParagraph.innerHTML = "CONGRATULATIONS! YOU WIN!"
  }else{
     finalParagraph.innerHTML = "SORRY :c  YOU LOSE!"
  };
  sectionMessages.appendChild(finalParagraph);
-}
+display(sectionReStart);
+};
 
 function checkLives(){
     let WinOrLose;
@@ -91,7 +97,7 @@ function checkLives(){
     
     createFinalMessage(WinOrLose);
     endGame();
-}
+};
 
 function combat(){
     let result;
@@ -111,14 +117,25 @@ function combat(){
 function endGame(){
     btnAttacks.forEach(button => {
         button.disabled = true;});
-}
+};
 
 function reStart(){
     location.reload();
-}
+};
+
+function hide(section){
+    section.style.display="none";
+};
+
+function display(section){
+    section.style.display="block";
+};
+
+hide(sectionAttack);
+hide(sectionReStart);
 
 btnChooseMokepon.addEventListener("click",chooseMokepon);
 
 functionalAttacks();
 
-btnReStart.addEventListener("click",reStart)
+btnReStart.addEventListener("click",reStart);
