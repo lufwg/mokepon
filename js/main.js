@@ -2,7 +2,9 @@ const $ = selector => document.getElementById(selector);
 let playerMokepon = $("PlayerMokepon");
 let pcMokepon = $("PcMokepon");
 let btnChooseMokepon = $("BtnChooseMokepon");
+let btnReStart = $("BtnReStart");
 let sectionMessages=$("Messages");
+let btnAttacks = document.getElementsByName("Attack");
 let mokeponChosen=0;
 let Attacks=["Fire","Water","Earth"];
 let playerAttack;
@@ -38,7 +40,6 @@ function random(min,max){
 };
 
 function functionalAttacks(){
-    let btnAttacks = document.getElementsByName("Attack");
     btnAttacks.forEach(Attack => {
         Attack.addEventListener("click", function() {
             AssingAttack(Attack.innerHTML)
@@ -89,6 +90,7 @@ function checkLives(){
     };
     
     createFinalMessage(WinOrLose);
+    endGame();
 }
 
 function combat(){
@@ -106,6 +108,17 @@ function combat(){
     checkLives();
 };
 
+function endGame(){
+    btnAttacks.forEach(button => {
+        button.disabled = true;});
+}
+
+function reStart(){
+    location.reload();
+}
+
 btnChooseMokepon.addEventListener("click",chooseMokepon);
 
 functionalAttacks();
+
+btnReStart.addEventListener("click",reStart)
