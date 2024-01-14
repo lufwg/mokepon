@@ -12,6 +12,7 @@ const sectionMessages=$("messages");
 const sectionReStart=$("reStart");
 const spanPlayerLives = $("livesPlayer");
 const spanPcLives= $("livesPc");
+const cards=$("cards");
 let btnAttacks = document.getElementsByName("attack");
 let mokeponChosen=0;
 let allMokepons=["Hipodoge","Capipepo","Ratigueya"];
@@ -20,6 +21,94 @@ let playerAttack;
 let PcAttack;
 let livesPlayer=3;
 let livesPc=3;
+let optionMokepons;
+
+class Mokepon {
+    constructor(name,img,lives){
+        this.name=name;
+        this.img=img;
+        this.lives=lives;
+        this.attacks=[];
+    }
+}
+let Mokepon=[];
+let hipodoge = new Mokepon("Hipodoge","./assets/mokepons_mokepon_hipodoge_attack.png",5);
+
+let capipepo = new Mokepon("Capipepo","./assets/mokepons_mokepon_capipepo_attack.png",5);
+
+let ratigueya = new Mokepon("Ratigueya","./assets/mokepons_mokepon_ratigueya_attack.png",5);
+
+hipodoge.attacks.push(
+    {
+        nombre: "💧",
+        id:"btnWater"
+    },
+    {
+        nombre: "🔥",
+        id:"btnFire" 
+    },
+    {
+        nombre: "💧",
+        id:"btnWater" 
+    },
+    {
+        nombre: "🌿",
+        id:"btnEarth" 
+    },
+    {
+        nombre: "💧",
+        id:"btnWater" 
+    }
+
+);
+
+capipepo.attacks.push(
+    {
+        nombre: "🌿",
+        id:"btnEarth" 
+    },
+    {
+        nombre: "💧",
+        id:"btnWater"
+    },
+    {
+        nombre: "🌿",
+        id:"btnEarth" 
+    },
+    {
+        nombre: "🔥",
+        id:"btnFire" 
+    },
+    {
+        nombre: "🌿",
+        id:"btnEarth" 
+    }
+);
+
+ratigueya.attacks.push(
+    {
+        nombre: "🔥",
+        id:"btnFire" 
+    },
+    {
+        nombre: "🌿",
+        id:"btnEarth" 
+    },
+    {
+        nombre: "🔥",
+        id:"btnFire" 
+    },
+    {
+        nombre: "💧",
+        id:"btnWater" 
+    },
+    {
+        nombre: "🔥",
+        id:"btnFire" 
+    }
+);
+
+Mokepon.push(hipodoge,capipepo,ratigueya);
 
 function chooseMokepon(){
     inputMokepons = document.getElementsByName("mokepon");
@@ -157,3 +246,15 @@ btnChooseMokepon.addEventListener("click",chooseMokepon);
 functionalAttacks();
 
 btnReStart.addEventListener("click",reStart);
+
+Mokepon.forEach((mokepon)=>{
+    optionMokepons =    `
+    <input type="radio" name="mokepon" id=${mokepon.name}/>
+            <label class="cardMokepon" for=${mokepon.name}>
+                <p>${mokepon.name}</p>
+                <img src=${mokepon.img} alt=${mokepon.name} srcset="">
+            </label>
+    `;
+    cards.innerHTML += optionMokepons;
+
+});
