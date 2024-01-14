@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* General */
+:root {
+    --color1: #711DB0;
+    --color2:#C21292;
+    --color3:#EF4040;
+    --color4:#FFA732;
+    --color5:black;
+    text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+    1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+}
+html{
+  min-height: 100vh
+}
+
+body {
+  font-family: 'Press Start 2P', system-ui;
+  background:
+  url("https://images.pling.com/img/00/00/61/45/57/1577017/eaa3c52f31b142f8c339388a3adc050af6d81a9f992ce7e4113107fe3b7d0dd5f25b.jpg");
+  background-repeat: no-repeat;
+  background-position:center center;
+  background-size: cover;
+}
+
+/* Home */
+
+#chooseMokepon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  color: var(--color1);
+  font-size: 36px;
+  text-align: center;
+}
+
+h2 {
+color: var(--color1);
+font-size: 24px;
+text-align: center;
+}
+
+.cards{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.cardMokepon {
+  background: linear-gradient(to bottom right,var(--color1),var(--color1),var(--color2), var(--color3), var(--color4),var(--color4));
+  width: 240px;
+  height: 84px;
+  margin: 4px;
+  border-radius: 28px;
+
+  display: flex;
+  justify-content: center;
+
+  cursor: pointer;
+  position:relative;
+}
+
+input { 
+  display: none;
+}
+input:checked + label{
+  background: transparent;
+}
+
+.cardMokepon img {
+    width:80px;
+}
+
+#choose{
+  margin-top: 20px;
+}
+
+/* Second page */
+
+#chooseAttack, #messages{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#cardHead, #cardBody{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}  
+
+#cardBody{
+  height:108px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+}
+
+  /* width */
+#cardBody::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+#cardBody::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+#cardBody::-webkit-scrollbar-thumb {
+  background: red; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+#cardBody::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
+
+p{
+  text-align: center;
+  margin: 16px;
+}
+#buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+button {
+  font-family: 'Press Start 2P', system-ui;
+  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+  1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+  font-size: 16px;
+  width: 200px;
+  height: 64px;
+  margin: 4px;
+  border-radius: 28px;
+
+}
+
+#btnEarth{
+  background:linear-gradient(to bottom right, var(--color4), green);
+}
+#btnFire{
+  background:linear-gradient(to bottom right,  var(--color3), red);
+}
+#btnWater{
+  background:linear-gradient(to bottom right,  var(--color1), aqua);
+}
+@keyframes Hover {
+  from {background: inherit;
+  }
+  to 
+  {
+    background: transparent;
+  }
+}
+
+button[name="attack"]:hover{
+  animation: Hover 1s;
+  background: transparent;
+}
+
+@media (max-width:740px){
+  .cards, #buttons{
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* CSS */
+.button-49,
+.button-49:after {
+  line-height: 78px;
+  background: linear-gradient(to bottom right,  var(--color3), red);
+  border: 0;
+  box-shadow: 6px 0px 0px var(--color1);
+  outline: transparent;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  font-family: 'Press Start 2P', system-ui;
+  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+  1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+  font-size: 16px;
+}
+
+.button-49:after {
+  --slice-0: inset(50% 50% 50% 50%);
+  --slice-1: inset(80% -6px 0 0);
+  --slice-2: inset(50% -6px 30% 0);
+  --slice-3: inset(10% -6px 85% 0);
+  --slice-4: inset(40% -6px 43% 0);
+  --slice-5: inset(80% -6px 5% 0);
+  
+content: 'GO FOR IT!';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 3%, var(--color1) 3%, var(--color1) 5%, var(--color3), red 5%);
+  text-shadow: -3px -3px 0px var(--color4), 3px 3px 0px var(--color1);
+  clip-path: var(--slice-0);
+}
+
+.button-49:hover:after {
+  animation: 1s glitch;
+  animation-timing-function: steps(2, end);
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: var(--slice-1);
+    transform: translate(-20px, -10px);
+  }
+  10% {
+    clip-path: var(--slice-3);
+    transform: translate(10px, 10px);
+  }
+  20% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 10px);
+  }
+  30% {
+    clip-path: var(--slice-3);
+    transform: translate(0px, 5px);
+  }
+  40% {
+    clip-path: var(--slice-2);
+    transform: translate(-5px, 0px);
+  }
+  50% {
+    clip-path: var(--slice-3);
+    transform: translate(5px, 0px);
+  }
+  60% {
+    clip-path: var(--slice-4);
+    transform: translate(5px, 10px);
+  }
+  70% {
+    clip-path: var(--slice-2);
+    transform: translate(-10px, 10px);
+  }
+  80% {
+    clip-path: var(--slice-5);
+    transform: translate(20px, -10px);
+  }
+  90% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 0px);
+  }
+  100% {
+    clip-path: var(--slice-1);
+    transform: translate(0);
+  }
+}

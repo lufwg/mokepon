@@ -4,42 +4,80 @@
     <meta charset="utf-8"/>
     <title>MOKEPON!</title>
     <script src="./js/main.js" defer></script>
+    <link rel="stylesheet" href="./style/styles.css">
 </head>
 <body>
-    <h1>MOKEPON!🔥💧🌿</h1>
-    <section id="ChooseMokepon">
+    <section id="chooseMokepon">
+        <h1>MOKEPON!🔥💧🌿</h1>
         <h2>Choose Your Mokepon:</h2>
-                      
-        <input type="radio" name="Mokepon" id="Hipodoge"/>
-        <label for="Hipodoge">Hipodoge</label>
-        <input type="radio" name="Mokepon" id="Capipepo"/>
-        <label for="Capipepo">Capipepo</label>
-        <input type="radio" name="Mokepon" id="Ratigueya"/>
-        <label for="Ratigueya">Ratigueya</label>
-        <!-- Hipodoge -> Water💧
-        Capipepo -> Earth🌿
-        Ratigueya -> Fire🔥
-        Langostelvis -> Water💧 & Fire🔥
-        Tucapalma -> Water💧 & Earth🌿
-        Pydos -> Earth🌿 & Fire🔥 -->
-        <button id="BtnChooseMokepon">Choose</button>
-    </section>
-    <section id="ChooseAttack">
-        <h2>Choose Your Attack</h2>
-        <p>
-            <button id="BtnFire" name="Attack">Fire</button>
-            <button id="BtnWater" name="Attack">Water</button>
-            <button id="BtnEarth" name="Attack">Earth</button>
-        </p>
-    </section>
-    <section id="Messages">
-        <p>Your Mokepon, <span id="PlayerMokepon"></span>, has <span id="livesPlayer">3</span> lives</p>
-        <p>My Mokepon, <span id="PcMokepon"></span>, has <span id="livesPc">3</span> lives</p>
-        <!-- <p>Your Mokepon Attacks with Fire🔥, My Mokepon Attacks with . You Win 🎉</p> -->
-    </section>
-    <section id="ReStart">
-        <button id="BtnReStart">ReStart</button>
+        <div class="cards">
+            <input type="radio" name="mokepon" id="hipodoge"/>
+            <label class="cardMokepon" for="hipodoge">
+                <p>Hipodoge</p>
+                <img src="./assets/mokepons_mokepon_hipodoge_attack.png" alt="hipodoge" srcset="">
+            </label>
+            <input type="radio" name="mokepon" id="capipepo"/>
+            <label class="cardMokepon" for="capipepo">
+                <p>Capipepo</p>
+                <img src="./assets/mokepons_mokepon_capipepo_attack.png" alt="capipepo" srcset="">
+            </label>
+            <input type="radio" name="mokepon" id="ratigueya"/>
+            <label class="cardMokepon" for="ratigueya">
+                <p>Ratigueya</p>
+                <img src="./assets/mokepons_mokepon_ratigueya_attack.png" alt="ratigueya" srcset="">
+            </label>
+            <!-- Hipodoge -> Water💧
+            Capipepo -> Earth🌿
+            Ratigueya -> Fire🔥
+            Langostelvis -> Water💧 & Fire🔥
+            Tucapalma -> Water💧 & Earth🌿
+            Pydos -> Earth🌿 & Fire🔥 -->
+        </div>     
+        <div id=choose>
+            <button id="btnChooseMokepon" role="button" class="button-49">Choose</button>
+        </div>
     </section>
 
+    <section id="chooseAttack">
+        <h1>MOKEPON!🔥💧🌿</h1>
+        <h2>Choose Your Attack:</h2>
+        <div id="buttons">
+            <div class="btnAttack">
+                <button id="btnFire"  name="attack" type="button">Fire</button>
+            </div>
+            <div class="btnAttack">
+                <button id="btnWater" name="attack" type="button">Water</button>
+            </div>
+            <div class="btnAttack">
+                <button id="btnEarth"  name="attack">Earth</button>
+            </div>
+        </div>
+                
+        <section id="messages">
+            <div id="reStart">
+                <button id="btnReStart" class="button-49">ReStart</button>
+            </div>
+            <div id="cardHead">
+                <div id="yourMokepon">
+                    <p>Your Mokepon</p>
+                    <p id="playerMokepon"></p>
+                    <p id="livesPlayer">3</p>
+                </div>
+                <div id="myMokepon">
+                    <p>My Mokepon</p>
+                    <p id="pcMokepon"></p>
+                    <p id="livesPc">3</p>
+                </div>
+            </div>
+            <div id="cardBody">
+                <div id="playerAttacks">
+                </div>
+                <div id="result">
+                </div>
+                <div id="pcAttacks">
+                </div>
+            </div>
+        </section>
+    </section>
 </body>
 </html>

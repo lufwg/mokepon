@@ -1,13 +1,16 @@
 const $ = selector => document.getElementById(selector);
-let playerMokepon = $("PlayerMokepon");
-let pcMokepon = $("PcMokepon");
-let btnChooseMokepon = $("BtnChooseMokepon");
-let btnReStart = $("BtnReStart");
-let sectionMessages=$("Messages");
-let sectionMokepon=$("ChooseMokepon");
-let sectionAttack=$("ChooseAttack");
-let sectionReStart=$("ReStart");
-let btnAttacks = document.getElementsByName("Attack");
+let playerMokepon = $("playerMokepon");
+let pcMokepon = $("pcMokepon");
+let btnChooseMokepon = $("btnChooseMokepon");
+let btnReStart = $("btnReStart");
+let divResult=$("result");
+let divPlayerAttack = $("playerAttacks");
+let divPcAttack = $("pcAttacks");
+let sectionMokepon=$("chooseMokepon");
+let sectionAttack=$("chooseAttack");
+let sectionMessages=$("messages");
+let sectionReStart=$("reStart");
+let btnAttacks = document.getElementsByName("attack");
 let mokeponChosen=0;
 let Attacks=["Fire","Water","Earth"];
 let playerAttack;
@@ -16,7 +19,7 @@ let livesPlayer=3;
 let livesPc=3;
 
 function chooseMokepon(){
-    inputMokepons = document.getElementsByName("Mokepon");
+    inputMokepons = document.getElementsByName("mokepon");
 /*     console.log(inputMokepons.length); */
     inputMokepons.forEach(input => {
         /* console.log(input); */
@@ -48,7 +51,10 @@ function random(min,max){
 function functionalAttacks(){
     btnAttacks.forEach(Attack => {
         Attack.addEventListener("click", function() {
-            AssingAttack(Attack.innerHTML)
+            if (!this.hasAttribute("data-Disebled"))
+            {
+                AssingAttack(Attack.innerHTML)
+            }
         });
     });
 };
@@ -67,9 +73,19 @@ function randomAttack(){
 function createMessages(result){
     let spanPlayerLives = $("livesPlayer");
     let spanPcLives= $("livesPc");
-    let paragraph =document.createElement("p");
-    paragraph.innerHTML = "Your Mokepon Attacks with "+playerAttack+", My Mokepon Attacks with "+PcAttack+". "+result+"!";
-    sectionMessages.appendChild(paragraph);
+    let pResult =document.createElement("p");
+    let pPlayerAttack=document.createElement("p");
+    let pPcAttack =document.createElement("p");
+
+    pResult.innerHTML = result;
+    divResult.appendChild(pResult);
+
+    pPlayerAttack.innerHTML = playerAttack;
+    divPlayerAttack.appendChild(pPlayerAttack);
+
+    pPcAttack.innerHTML =PcAttack
+    divPcAttack.appendChild(pPcAttack);
+
     spanPlayerLives.innerHTML=livesPlayer;
     spanPcLives.innerHTML=livesPc;
 };
@@ -81,7 +97,7 @@ function createFinalMessage(finalResult){
  }else{
     finalParagraph.innerHTML = "SORRY :c  YOU LOSE!"
  };
- sectionMessages.appendChild(finalParagraph);
+ sectionMessages.insertAdjacentElement("afterbegin", finalParagraph);
 display(sectionReStart);
 };
 
@@ -102,12 +118,12 @@ function checkLives(){
 function combat(){
     let result;
     if(PcAttack==playerAttack){
-        result="Tie";
+        result="It´s a Tie";
     }else if((playerAttack==Attacks[0] & PcAttack==Attacks[2])||(playerAttack==Attacks[1] & PcAttack==Attacks[0])||(playerAttack==Attacks[2] & PcAttack==Attacks[1])){
-        result="YOU WIN";
+        result="YOU WIN!";
         livesPc--
     }else{
-        result="YOU LOSE";
+        result="YOU LOSE!";
         livesPlayer--
     };
     createMessages(result);
@@ -116,7 +132,8 @@ function combat(){
 
 function endGame(){
     btnAttacks.forEach(button => {
-        button.disabled = true;});
+        button.setAttribute("data-Disebled", true);
+    });
 };
 
 function reStart(){
@@ -128,7 +145,7 @@ function hide(section){
 };
 
 function display(section){
-    section.style.display="block";
+    section.style.display="flex";
 };
 
 hide(sectionAttack);
