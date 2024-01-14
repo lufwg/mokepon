@@ -1,17 +1,20 @@
 const $ = selector => document.getElementById(selector);
-let playerMokepon = $("playerMokepon");
-let pcMokepon = $("pcMokepon");
-let btnChooseMokepon = $("btnChooseMokepon");
-let btnReStart = $("btnReStart");
-let divResult=$("result");
-let divPlayerAttack = $("playerAttacks");
-let divPcAttack = $("pcAttacks");
-let sectionMokepon=$("chooseMokepon");
-let sectionAttack=$("chooseAttack");
-let sectionMessages=$("messages");
-let sectionReStart=$("reStart");
+const playerMokepon = $("playerMokepon");
+const pcMokepon = $("pcMokepon");
+const btnChooseMokepon = $("btnChooseMokepon");
+const btnReStart = $("btnReStart");
+const divResult=$("result");
+const divPlayerAttacks = $("playerAttacks");
+const divPcAttacks = $("pcAttacks");
+const sectionMokepon=$("chooseMokepon");
+const sectionAttack=$("chooseAttack");
+const sectionMessages=$("messages");
+const sectionReStart=$("reStart");
+const spanPlayerLives = $("livesPlayer");
+const spanPcLives= $("livesPc");
 let btnAttacks = document.getElementsByName("attack");
 let mokeponChosen=0;
+let allMokepons=["Hipodoge","Capipepo","Ratigueya"];
 let Attacks=["Fire","Water","Earth"];
 let playerAttack;
 let PcAttack;
@@ -40,8 +43,7 @@ function chooseMokepon(){
 
 function randomMokepon(){
     let randomNumber = random(1,3);
-    let Mokepons=["Hipodoge","Capipepo","Ratigueya"];
-    pcMokepon.innerHTML=Mokepons[randomNumber];
+    pcMokepon.innerHTML=allMokepons[randomNumber];
 };
 
 function random(min,max){
@@ -71,8 +73,7 @@ function randomAttack(){
 };
 
 function createMessages(result){
-    let spanPlayerLives = $("livesPlayer");
-    let spanPcLives= $("livesPc");
+
     let pResult =document.createElement("p");
     let pPlayerAttack=document.createElement("p");
     let pPcAttack =document.createElement("p");
@@ -81,10 +82,10 @@ function createMessages(result){
     divResult.appendChild(pResult);
 
     pPlayerAttack.innerHTML = playerAttack;
-    divPlayerAttack.appendChild(pPlayerAttack);
+    divPlayerAttacks.appendChild(pPlayerAttack);
 
     pPcAttack.innerHTML =PcAttack
-    divPcAttack.appendChild(pPcAttack);
+    divPcAttacks.appendChild(pPcAttack);
 
     spanPlayerLives.innerHTML=livesPlayer;
     spanPcLives.innerHTML=livesPc;
