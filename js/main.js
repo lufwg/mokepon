@@ -13,7 +13,7 @@ const sectionReStart=$("reStart");
 const spanPlayerLives = $("livesPlayer");
 const spanPcLives= $("livesPc");
 const cards=$("cards");
-let btnAttacks = document.getElementsByName("attack");
+
 let mokeponChosen=0;
 let allMokepons=["Hipodoge","Capipepo","Ratigueya"];
 let Attacks=["Fire","Water","Earth"];
@@ -31,7 +31,7 @@ class Mokepon {
         this.attacks=[];
     }
 }
-let Mokepon=[];
+let mokepon=[];
 let hipodoge = new Mokepon("Hipodoge","./assets/mokepons_mokepon_hipodoge_attack.png",5);
 
 let capipepo = new Mokepon("Capipepo","./assets/mokepons_mokepon_capipepo_attack.png",5);
@@ -108,7 +108,20 @@ ratigueya.attacks.push(
     }
 );
 
-Mokepon.push(hipodoge,capipepo,ratigueya);
+mokepon.push(hipodoge,capipepo,ratigueya);
+
+mokepon.forEach((mokepon)=>{
+    optionMokepons =    `
+    <input type="radio" name="mokepon" id="${mokepon.name}"/>
+    <label class="cardMokepon" for=${mokepon.name}>
+        <p>${mokepon.name}</p>
+        <img src=${mokepon.img} alt=${mokepon.name} srcset="">
+    </label>
+    `;
+    cards.innerHTML += optionMokepons;
+});
+
+let btnAttacks = document.getElementsByName("attack");
 
 function chooseMokepon(){
     inputMokepons = document.getElementsByName("mokepon");
@@ -247,14 +260,3 @@ functionalAttacks();
 
 btnReStart.addEventListener("click",reStart);
 
-Mokepon.forEach((mokepon)=>{
-    optionMokepons =    `
-    <input type="radio" name="mokepon" id=${mokepon.name}/>
-            <label class="cardMokepon" for=${mokepon.name}>
-                <p>${mokepon.name}</p>
-                <img src=${mokepon.img} alt=${mokepon.name} srcset="">
-            </label>
-    `;
-    cards.innerHTML += optionMokepons;
-
-});
