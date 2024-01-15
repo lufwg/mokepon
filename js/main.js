@@ -13,15 +13,18 @@ const sectionReStart=$("reStart");
 const spanPlayerLives = $("livesPlayer");
 const spanPcLives= $("livesPc");
 const cards=$("cards");
+const buttonsContainer = $("buttons");
 
 let mokeponChosen=0;
-let allMokepons=["Hipodoge","Capipepo","Ratigueya"];
-let Attacks=["Fire","Water","Earth"];
+
+let allAttacks=[{name:"🔥", id:"btnFire"},{name:"💧",id:"btnWater"},{name:"🌿",id:"btnEarth"}];
 let playerAttack;
 let PcAttack;
 let livesPlayer=3;
 let livesPc=3;
 let optionMokepons;
+let playerChosenMokepon;
+let pcChosenMokepon;
 
 class Mokepon {
     constructor(name,img,lives){
@@ -31,86 +34,24 @@ class Mokepon {
         this.attacks=[];
     }
 }
-let mokepon=[];
+let mokeponsArray=[];
+let mokeponsObj = {};
 let hipodoge = new Mokepon("Hipodoge","./assets/mokepons_mokepon_hipodoge_attack.png",5);
 
 let capipepo = new Mokepon("Capipepo","./assets/mokepons_mokepon_capipepo_attack.png",5);
 
 let ratigueya = new Mokepon("Ratigueya","./assets/mokepons_mokepon_ratigueya_attack.png",5);
 
-hipodoge.attacks.push(
-    {
-        nombre: "💧",
-        id:"btnWater"
-    },
-    {
-        nombre: "🔥",
-        id:"btnFire" 
-    },
-    {
-        nombre: "💧",
-        id:"btnWater" 
-    },
-    {
-        nombre: "🌿",
-        id:"btnEarth" 
-    },
-    {
-        nombre: "💧",
-        id:"btnWater" 
-    }
+hipodoge.attacks.push(allAttacks[1],allAttacks[0],allAttacks[1],allAttacks[2],allAttacks[1]);
 
-);
+capipepo.attacks.push(allAttacks[2],allAttacks[1],allAttacks[2],allAttacks[0],allAttacks[2]);
 
-capipepo.attacks.push(
-    {
-        nombre: "🌿",
-        id:"btnEarth" 
-    },
-    {
-        nombre: "💧",
-        id:"btnWater"
-    },
-    {
-        nombre: "🌿",
-        id:"btnEarth" 
-    },
-    {
-        nombre: "🔥",
-        id:"btnFire" 
-    },
-    {
-        nombre: "🌿",
-        id:"btnEarth" 
-    }
-);
+ratigueya.attacks.push(allAttacks[0],allAttacks[2],allAttacks[0],allAttacks[1],allAttacks[0]);
 
-ratigueya.attacks.push(
-    {
-        nombre: "🔥",
-        id:"btnFire" 
-    },
-    {
-        nombre: "🌿",
-        id:"btnEarth" 
-    },
-    {
-        nombre: "🔥",
-        id:"btnFire" 
-    },
-    {
-        nombre: "💧",
-        id:"btnWater" 
-    },
-    {
-        nombre: "🔥",
-        id:"btnFire" 
-    }
-);
+mokeponsArray.push(hipodoge,capipepo,ratigueya);
 
-mokepon.push(hipodoge,capipepo,ratigueya);
-
-mokepon.forEach((mokepon)=>{
+mokeponsArray.forEach((mokepon)=>{
+    mokeponsObj[mokepon.name]=mokepon;
     optionMokepons =    `
     <input type="radio" name="mokepon" id="${mokepon.name}"/>
     <label class="cardMokepon" for=${mokepon.name}>
@@ -121,31 +62,48 @@ mokepon.forEach((mokepon)=>{
     cards.innerHTML += optionMokepons;
 });
 
-let btnAttacks = document.getElementsByName("attack");
+let inputMokepons = document.getElementsByName("mokepon");
 
 function chooseMokepon(){
-    inputMokepons = document.getElementsByName("mokepon");
+    
 /*     console.log(inputMokepons.length); */
     inputMokepons.forEach(input => {
         /* console.log(input); */
         if(input.checked){
             mokeponChosen++
             playerMokepon.innerHTML=input.id;
+            playerChosenMokepon=input.id
         };
     });
     if(!mokeponChosen){
         alert("Choose A Mokepon To Continue");
     }else{
         randomMokepon();
+         displayAttacksButtons();
+         functionalAttacks();
         display(sectionAttack);
         hide(sectionMokepon);
-
     };
 };
 
+function displayAttacksButtons(){
+    mokeponsObj[playerChosenMokepon].attacks.forEach((attack)=>{
+        buttonsContainer.innerHTML+=`
+    <div class="btnAttack">
+        <button id="${attack.id}"  name="attack" type="button">${attack.name}</button>
+    </div>
+    `
+    })
+    
+}
+
+let btnAttacks = document.getElementsByName("attack");
+
 function randomMokepon(){
-    let randomNumber = random(1,3);
-    pcMokepon.innerHTML=allMokepons[randomNumber];
+    let randomNumber = random(1,mokeponsArray.length);
+
+    pcChosenMokepon=mokeponsArray[randomNumber].name;
+    pcMokepon.innerHTML=pcChosenMokepon;
 };
 
 function random(min,max){
@@ -153,7 +111,7 @@ function random(min,max){
 };
 
 function functionalAttacks(){
-    btnAttacks.forEach(Attack => {
+    btnAttacks.forEach((Attack) => {
         Attack.addEventListener("click", function() {
             if (!this.hasAttribute("data-Disebled"))
             {
@@ -169,8 +127,8 @@ function AssingAttack(Attack) {
 };
 
 function randomAttack(){
-    let randomNumber = random(1,3);
-    PcAttack=Attacks[randomNumber];
+    let randomNumber = random(1,mokeponsObj[pcChosenMokepon].attacks.length);
+    PcAttack=mokeponsObj[pcChosenMokepon].attacks[randomNumber].name;
     combat();
 };
 
@@ -222,7 +180,7 @@ function combat(){
     let result;
     if(PcAttack==playerAttack){
         result="It´s a Tie";
-    }else if((playerAttack==Attacks[0] & PcAttack==Attacks[2])||(playerAttack==Attacks[1] & PcAttack==Attacks[0])||(playerAttack==Attacks[2] & PcAttack==Attacks[1])){
+    }else if((playerAttack==allAttacks[0].name & PcAttack==allAttacks[2].name)||(playerAttack==allAttacks[1].name & PcAttack==allAttacks[0].name)||(playerAttack==allAttacks[2].name & PcAttack==allAttacks[1].name)){
         result="YOU WIN!";
         livesPc--
     }else{
@@ -255,8 +213,5 @@ hide(sectionAttack);
 hide(sectionReStart);
 
 btnChooseMokepon.addEventListener("click",chooseMokepon);
-
-functionalAttacks();
-
 btnReStart.addEventListener("click",reStart);
 
