@@ -77,59 +77,6 @@ input:checked + label{
 #choose{
   margin-top: 20px;
 }
-
-/* Second page */
-
-#chooseAttack, #messages{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#cardHead, #cardBody{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}  
-
-#cardBody{
-  height:108px;
-  overflow-y: scroll;
-  box-sizing: border-box;
-}
-
-  /* width */
-#cardBody::-webkit-scrollbar {
-  width: 20px;
-}
-
-/* Track */
-#cardBody::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
-  border-radius: 10px;
-}
- 
-/* Handle */
-#cardBody::-webkit-scrollbar-thumb {
-  background: red; 
-  border-radius: 10px;
-}
-
-/* Handle on hover */
-#cardBody::-webkit-scrollbar-thumb:hover {
-  background: #b30000; 
-}
-
-p{
-  text-align: center;
-  margin: 16px;
-}
-#buttons{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
 button {
   font-family: 'Press Start 2P', system-ui;
   text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
@@ -142,37 +89,7 @@ button {
 
 }
 
-#btnEarth{
-  background:linear-gradient(to bottom right, var(--color4), green);
-}
-#btnFire{
-  background:linear-gradient(to bottom right,  var(--color3), red);
-}
-#btnWater{
-  background:linear-gradient(to bottom right,  var(--color1), aqua);
-}
-@keyframes Hover {
-  from {background: inherit;
-  }
-  to 
-  {
-    background: transparent;
-  }
-}
-
-button[name="attack"]:hover{
-  animation: Hover 1s;
-  background: transparent;
-}
-
-@media (max-width:740px){
-  .cards, #buttons{
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-/* CSS */
+/* CSS Stolen */
 .button-49,
 .button-49:after {
   line-height: 78px;
@@ -261,3 +178,89 @@ content: 'GO FOR IT!';
     transform: translate(0);
   }
 }
+
+/* Second page */
+
+#chooseAttack, #messages{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#buttonsAttacks{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+
+#btnEarth{
+  background:linear-gradient(to bottom right, var(--color4), green);
+}
+#btnFire{
+  background:linear-gradient(to bottom right,  var(--color3), red);
+}
+#btnWater{
+  background:linear-gradient(to bottom right,  var(--color1), aqua);
+}
+@keyframes Hover {
+  from {background: inherit;
+  }
+  to 
+  {
+    background: transparent;
+  }
+}
+
+button[name="attack"]:hover{
+  animation: Hover 1s;
+  background: transparent;
+}
+
+#cardHead, #cardBody{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}  
+
+#cardBody{
+  height:108px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+}
+
+  /* width */
+#cardBody::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+#cardBody::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+#cardBody::-webkit-scrollbar-thumb {
+  background: red; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+#cardBody::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
+
+p{
+  text-align: center;
+  margin: 16px;
+}
+
+
+@media (max-width:740px){
+  .cards, #buttonsAttacks{
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
